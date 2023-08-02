@@ -3,6 +3,10 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.forms import UserCreationForm
 
 
+def home_page(request):
+    return render(request, 'base.html')
+
+
 def login_view(request):
     if request.method == 'POST':
         return auth_views.LoginView.as_view(template_name='user/login.html')(request)

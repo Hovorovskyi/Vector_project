@@ -8,3 +8,7 @@ class DeliveryOrder(models.Model):
     items = models.ManyToManyField(MenuItem)
     total_price = models.IntegerField()
     delivery_address = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = 'Замовлення'
+        verbose_name_plural = 'Замовлення'
