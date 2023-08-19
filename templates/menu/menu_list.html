@@ -1,22 +1,45 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 {% block content %}
-    <div class="container mt-3">
-        <h2>Меню</h2>
-        <div class="row">
-            <div class="col-md-6">
-                {% for menu_item in menu_items %}
-                    <div class="card" style="width: 18rem;">
-                      <img src="..." class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h3 class="card-title">{{ menu_item.name }}</h3>
-                        <p class="card-text">{{ menu_item.description }}</p>
-                        <p class="card-text">{{ menu_item.price }}</p>
-                      </div>
-                    </div>
-                {% empty %}
-                    <p>No menu items found.</p>
-                {% endfor %}
+<div class="card-grid">
+    {% for menu_item in menu_items %}
+    <div class="card mb-3">
+      <div class="card-header">
+          <a href="{{ menu_item.get_absolute_url }}" class="list-group-itemlist-group-item-action">{{ menu_item.category }}</a>
+      </div>
+      <div class="card-body">
+        <div class="media">
+            {% if menu_item.image %}
+                <img src="{{ menu_item.image.url }}" height="370" width="270" class="mb-3">
+            {% else %}
+                <img src="https://lh3.googleusercontent.com/p/AF1QipPdXKG8KGK8_uo1gAw0MAEbRhZrHLN14i-gDcWQ=s1360-w380-h380" class="mr-3">
+            {% endif %}
+            <div class="media-body">
+                <h5 class="card-title">{{ menu_item.name }}</h5>
+                <p class="card-text">{{ menu_item.description }}</p>
+                <p class="card-text">{{ menu_item.price }}</p>
             </div>
         </div>
+      </div>
+      <div class="card-footer text-body-secondary">
+        <a href="#" class="btn btn-primary">Додати у кошик</a>
+      </div>
     </div>
+    {% empty %}
+        <p>No menu items found.</p>
+    {% endfor %}
+</div>
+
+<style>
+    /* Создаем сетку с тремя колонками */
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* Вы можете изменить число 3, чтобы установить другое количество колонок */
+        gap: 20px; /* Расстояние между карточками */
+    }
+
+    .card {
+        /* Дополнительные стили для вашей карточки */
+    }
+</style>
 {% endblock %}
